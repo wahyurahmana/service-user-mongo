@@ -43,4 +43,21 @@ module.exports = class UserController {
       console.log(error)
     }
   }
+  
+  static async updateUser(req, res, next){
+    try {
+      const data = {
+        username : req.body.username,
+        email : req.body.email,
+        password : req.body.password,
+        role : req.body.role,
+        phoneNumber : req.body.phoneNumber,
+        address : req.body.address,
+      }
+      await UserModel.updateUser(req.params.userId, data)
+      res.status(200).json({status : true, message : `success update id ${req.params.userId}`})
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

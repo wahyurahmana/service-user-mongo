@@ -6,5 +6,6 @@ router.get('/', UserController.getAllUser)
 router.post('/', UserController.addUser)
 router.get('/:userId', UserController.getUser)
 router.delete('/:userId', UserController.deleteUser)
+router.put('/:userId', UserController.updateUser)
 
 module.exports = router

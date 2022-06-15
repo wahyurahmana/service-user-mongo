@@ -51,4 +51,22 @@ module.exports = class UserModel {
       console.log(error, 'dari model deleteUser')
     }
   }
+
+  static async updateUser(userId, data){
+    try {
+      const newData = {
+        ...data,
+        password : hash(data.password)
+      }
+      const users = await getDb().collection('Users')
+      const result = await users.updateOne({
+        _id : ObjectId(userId)
+      }, {
+        $set : newData
+      })
+      return result
+    } catch (error) {
+      console.log(error, 'ini dari modle update user')
+    }
+  }
 }
