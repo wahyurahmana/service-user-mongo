@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb")
 const { getDb } = require("../db/conn")
 const { hash } = require("../helpers/bcryptjs")
 
@@ -23,7 +24,31 @@ module.exports = class UserModel {
       const result = await users.insertOne(newData)
       return result
     } catch (error) {
-      console.log(error, 'dari model getAllUser')
+      console.log(error, 'dari model addUser')
+    }
+  }
+
+  static async getUser (userId) {
+    try {
+      const users = await getDb().collection('Users')
+      const data = await users.find({
+        _id : ObjectId(userId)
+      }).toArray()
+      return data
+    } catch (error) {
+      console.log(error, 'dari model getUser')
+    }
+  }
+
+  static async deleteUser (userId) {
+    try {
+      const users = await getDb().collection('Users')
+      const data = await users.deleteOne({
+        _id : ObjectId(userId)
+      })
+      return data
+    } catch (error) {
+      console.log(error, 'dari model deleteUser')
     }
   }
 }

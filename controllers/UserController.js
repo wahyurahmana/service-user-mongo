@@ -25,4 +25,22 @@ module.exports = class UserController {
       console.log(error)
     }
   }
+
+  static async getUser (req, res, next) {
+    try {
+      const data = await UserModel.getUser(req.params.userId)
+      res.status(200).json({status : true, data})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  static async deleteUser (req, res, next) {
+    try {
+      const data = await UserModel.deleteUser(req.params.userId)
+      res.status(200).json({status : true, message : `success delete id ${req.params.userId}`})
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
