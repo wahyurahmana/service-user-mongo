@@ -1,5 +1,6 @@
 const UserModel = require("../models/UserModel")
-
+const {compare} = require('../helpers/bcryptjs')
+const { sign } = require("../helpers/jwt")
 module.exports = class UserController {
   static async getAllUser (req, res, next) {
     try {
@@ -56,6 +57,24 @@ module.exports = class UserController {
       }
       await UserModel.updateUser(req.params.userId, data)
       res.status(200).json({status : true, message : `success update id ${req.params.userId}`})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  static async login (req, res, next){
+    try {
+      const data = await UserModel.getUser(undefined, req.body.email)
+      if (data.length !== 0) {
+        if (compare(req.body.password, data[0].password)) {
+          const access_token = sign({email : data[0].email})
+          res.status(200).json({status : true, data : {access_token}})
+        } else {
+          res.status(401).json({status : false, message : 'wrong email/password'})
+        }
+      }else{
+        res.status(401).json({status : false, message : 'wrong email/password'})
+      }
     } catch (error) {
       console.log(error)
     }

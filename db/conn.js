@@ -6,18 +6,6 @@ let dbConnection;
 
 //cara mongodb
 module.exports = {
-  // connectToServer: function (callback) {
-  //   client.connect(function (err, db) {
-  //     if (err || !db) {
-  //       return callback(err);
-  //     }
-
-  //     dbConnection = db.db("sample_airbnb");
-  //     console.log("Successfully connected to MongoDB.");
-
-  //     return callback();
-  //   });
-  // },
   connectToServer :  () => {
     return new Promise((resolve, reject)=> {
       client.connect()

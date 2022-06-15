@@ -28,15 +28,28 @@ module.exports = class UserModel {
     }
   }
 
-  static async getUser (userId) {
-    try {
-      const users = await getDb().collection('Users')
-      const data = await users.find({
-        _id : ObjectId(userId)
-      }).toArray()
-      return data
-    } catch (error) {
-      console.log(error, 'dari model getUser')
+  static async getUser (userId, email) { //bisa pakai operator utk find
+    if (userId) {
+      try {
+        const users = await getDb().collection('Users')
+        const data = await users.find({
+          _id : ObjectId(userId)
+        }).toArray()
+        return data
+      } catch (error) {
+        console.log(error, 'dari model getUser')
+      }
+    }else{
+      try {
+        const users = await getDb().collection('Users')
+        const data = await users.find({
+          email : email
+        }).toArray()
+        console.log(data)
+        return data
+      } catch (error) {
+        console.log(error, 'dari model getUser')
+      }
     }
   }
 
