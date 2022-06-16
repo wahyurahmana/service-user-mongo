@@ -67,7 +67,7 @@ module.exports = class UserController {
       const data = await UserModel.getUser(undefined, req.body.email)
       if (data.length !== 0) {
         if (compare(req.body.password, data[0].password)) {
-          const access_token = sign({email : data[0].email})
+          const access_token = sign({id : data[0]._id, email : data[0].email})
           res.status(200).json({status : true, data : {access_token}})
         } else {
           res.status(401).json({status : false, message : 'wrong email/password'})

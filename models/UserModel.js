@@ -45,7 +45,6 @@ module.exports = class UserModel {
         const data = await users.find({
           email : email
         }).toArray()
-        console.log(data)
         return data
       } catch (error) {
         console.log(error, 'dari model getUser')
