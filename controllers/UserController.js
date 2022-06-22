@@ -30,7 +30,7 @@ module.exports = class UserController {
   static async getUser (req, res, next) {
     try {
       const data = await UserModel.getUser(req.params.userId)
-      res.status(200).json({status : true, data})
+      res.status(200).json({status : true, data : data[0]})
     } catch (error) {
       console.log(error)
     }
