@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const connectionString = 'mongodb://127.0.0.1:27017'
+const connectionString = `mongodb+srv://wahyurahmana:${process.env.PASSWORD_DB_ATLAS}@cluster0.b8y02bp.mongodb.net/?retryWrites=true&w=majority`
 const client = new MongoClient(connectionString)
 
 let dbConnection;
