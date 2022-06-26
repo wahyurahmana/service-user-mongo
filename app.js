@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-const {connectToServer, getDb} = require('./db/conn')
+const {connectToServer} = require('./db/conn')
 const allRouter = require('./routes')
 const app = express()
 const port = process.env.PORT || 3000
@@ -21,14 +21,3 @@ connectToServer()
 });
 
 app.use(allRouter)
-
-// app.get('/', async (req, res, next)=> {
-//   try {
-    // const users = await getDb().collection('Users')
-    // const data = await users.find().toArray()
-    // console.log(data)
-//   } catch (error) {
-//     console.log(error)
-//   }
-
-// })
